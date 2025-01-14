@@ -1,7 +1,19 @@
+const tileContainer = document.querySelector('.tiles-container');
+tileContainer.addEventListener('click', (event) => {
+    let target = event.target;
+    switch(target.getAttribute('class')){
+        case 'tile':
+            console.log(target.getAttribute('data-index'));
+            break;
+    }
+});
+
+function choiceToggle(){
+    choice = (choice === 'x') ? 'o' : 'x';
+}
 
 const gameBoard = (function(){
     const tiles = Object.seal(['', '', '', '', '', '', '', '', '']);
-    // const tiles = ['', '', '', '', '', '', '', '', ''];
 
     function placeChoice(index, choice){
         tiles[index] = choice;
@@ -50,13 +62,3 @@ const gameBoard = (function(){
         clearTiles,
     }
 })();
-
-// gameBoard.placeChoice(0, 'x');
-// gameBoard.placeChoice(1, 'o');
-// gameBoard.placeChoice(2, 'x');
-// gameBoard.placeChoice(3, 'o');
-// gameBoard.placeChoice(4, 'x');
-// gameBoard.placeChoice(5, 'o');
-// gameBoard.placeChoice(6, 'o');
-// gameBoard.placeChoice(7, 'x');
-// gameBoard.placeChoice(8, 'x');

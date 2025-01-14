@@ -1,0 +1,74 @@
+@font-face {
+    font-family: jersey;
+    src: url(./font/jersey15-regular-webfont.woff2) format('woff2');
+    src: url(./font/jersey15-regular-webfont.woff) format('woff');
+}
+:root{
+    --primary: white;
+    --secondary: #E5D9F2;
+    --tertiary: #A294F9;
+    --red-shade: #D76C82;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--primary);
+}
+h1{
+    font-family: jersey;
+    font-size: 130px;
+    color: var(--red-shade);
+    text-shadow: 2px 2px 3px var(--tertiary);
+}
+.tiles-container{
+    background-color: var(--tertiary);
+    height: 600px;
+    width: 600px;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    gap: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 10px;
+    background-clip: content-box;
+}
+.tile{
+    border: none;
+    background-color: var(--primary);
+    font-family: jersey, sans-serif;
+    font-size: 150px;
+    text-shadow: 2px 2px 2px var(--red-shade);
+    color: var(--tertiary);
+    cursor: pointer;
+}
+.tile:active{
+    background-color: var(--secondary);
+}
+.tile:hover{
+    border: 2px solid red;
+    border-radius: 5px;
+}
+.reset-button{
+    background-color: var(--tertiary);
+    margin-bottom: 20px;
+    padding: 10px 30px;
+    border-radius: 15px;
+    border: none;
+    font-size: 1.4rem;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+.reset-button:active{
+    background-color: var(--secondary);
+}
+.reset-button:hover{
+    box-shadow: 0px 0px 4px var(--red-shade);
+}
