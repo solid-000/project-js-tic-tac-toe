@@ -1,15 +1,23 @@
+let turn = 'x';
 const tileContainer = document.querySelector('.tiles-container');
+const resultDiv = document.querySelector('.result');
 tileContainer.addEventListener('click', (event) => {
     let target = event.target;
     switch(target.getAttribute('class')){
         case 'tile':
-            console.log(target.getAttribute('data-index'));
+            gameBoard.placeChoice(target.getAttribute('data-index'), turn);
+            target.textContent = turn;
+            turnToggle();
+            target.disabled = true;
             break;
     }
 });
-
-function choiceToggle(){
-    choice = (choice === 'x') ? 'o' : 'x';
+document.querySelector('.reset-button').addEventListener('click', ()=>{
+    gameBoard.clearTiles();
+});
+ 
+function turnToggle(){
+    turn = (turn === 'x') ? 'o' : 'x';
 }
 
 const gameBoard = (function(){
@@ -38,11 +46,11 @@ const gameBoard = (function(){
         if(tiles[2] === placeholder && tiles[4] === placeholder && tiles[6] === placeholder) victor = placeholder;
 
         if(victor === 'x'){
-            console.log('x wins');
+            resultDiv.textContent = `Player 1 Wins!`;
         }else if(victor === 'o'){
-            console.log('o wins');
+            resultDiv.textContent = `Player 2 Wins!`;
         }else if((tiles[0] && tiles[1] && tiles[2] && tiles[3] && tiles[4] && tiles[5] && tiles[6] && tiles[7] && tiles[8]) && !victor){
-            console.log('draw');
+            resultDiv.textContent = "Its's a Draw!";
         }
     }
 
@@ -50,15 +58,16 @@ const gameBoard = (function(){
         for(let i = 0; i < tiles.length; i++){
             tiles[i] = '';
         }
-    }
-
-    function output(){
-        console.log(tiles)
+        let tilesOnScreen = document.querySelectorAll('.tile');
+        tilesOnScreen.forEach(element => {
+            element.textContent = '';
+            element.disabled = false;
+            turn = 'x';
+        });
     }
 
     return {
         placeChoice,
-        output,
         clearTiles,
     }
 })();
