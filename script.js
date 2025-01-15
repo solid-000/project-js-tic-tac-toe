@@ -22,6 +22,7 @@ function turnToggle(){
 
 const gameBoard = (function(){
     const tiles = Object.seal(['', '', '', '', '', '', '', '', '']);
+    let tilesOnScreen = document.querySelectorAll('.tile');
 
     function placeChoice(index, choice){
         tiles[index] = choice;
@@ -47,8 +48,10 @@ const gameBoard = (function(){
 
         if(victor === 'x'){
             resultDiv.textContent = `Player 1 Wins!`;
+            disableTilesOnWin();
         }else if(victor === 'o'){
             resultDiv.textContent = `Player 2 Wins!`;
+            disableTilesOnWin();
         }else if((tiles[0] && tiles[1] && tiles[2] && tiles[3] && tiles[4] && tiles[5] && tiles[6] && tiles[7] && tiles[8]) && !victor){
             resultDiv.textContent = "Its's a Draw!";
         }
@@ -58,11 +61,17 @@ const gameBoard = (function(){
         for(let i = 0; i < tiles.length; i++){
             tiles[i] = '';
         }
-        let tilesOnScreen = document.querySelectorAll('.tile');
         tilesOnScreen.forEach(element => {
             element.textContent = '';
             element.disabled = false;
             turn = 'x';
+        });
+        resultDiv.textContent = '';
+    }
+
+    function disableTilesOnWin(){
+        tilesOnScreen.forEach(element => {
+            element.disabled = true;
         });
     }
 
